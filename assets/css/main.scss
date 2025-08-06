@@ -1,0 +1,44 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap");
+
+html[dir="rtl"] {
+  body,
+  html {
+    direction: rtl; /* Right to Left */
+    text-align: right;
+  }
+  a.link-viewall {
+    padding: 6px 0 6px 25px;
+  }
+  a.link-viewall span {
+    margin-right: 0;
+    margin-left: 20px;
+  }
+  .location-box h4 {
+    font-size: 18px;
+  }
+  .title h2 {
+    font-size: 50px;
+  }
+  .page-title span {
+    right: 5vw;
+    left: 0;
+  }
+  .field-group label {
+    border-left: 1px solid #393939;
+    border-right: 0;
+  }
+  .field-group .form-control {
+    padding-right: 30px;
+  }
+  .button-bar {
+    text-align: left;
+  }
+  .field-group-textarea label {
+    border: 0 !important;
+  }
+  .mainSlider .sliderBig::before {
+    left: 8%;
+    right: auto;
+  }
+}

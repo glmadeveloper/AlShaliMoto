@@ -1,0 +1,22 @@
+{
+  "home": "Home",
+  "contactus": "Contact Us",
+  "products": "Products",
+  "aboutus": "About Us",
+  "submit": "Submit",
+  "message": "Message",
+  "yourName": "Your Name",
+  "yourEmail": "Your Email",
+  "yourNumber": "Your Number",
+  "pleaseEnterYourName": "Please enter your name",
+  "pleaseEnterYourEmail": "Please enter your email",
+  "pleaseEnterYourNumber": "Please enter your Mobile Number",
+  "pleaseEnterYourMessage": "Please enter your Message",
+  "headOffice": "Head Office",
+  "ourServices": "Our Services",
+  "openHours": "Open Hours",
+  "subsidiaries": "Subsidiaries",
+  "power": "Power",
+  "torque": "Torque",
+  "wheelbase": "Wheelbase"
+}
