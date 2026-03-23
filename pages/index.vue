@@ -1,201 +1,10 @@
 <template>
   <div>
-    <!-- Main Slider Start -->
-    <section class="section-slider">
-      <div class="container">
-        <div class="mainSlider">
-          <NuxtLink to="/products" class="link-viewall xyz-in"
-            ><span
-              class=""
-              :xyz="
-                activeFlag == true
-                  ? 'fade ease-in up-75% '
-                  : 'fade ease-in down-75%'
-              "
-            >
-              {{ popularBrandName }}</span
-            >
-            <i class="fa-solid fa-arrow-right-long"></i
-          ></NuxtLink>
 
-          <div
-            style="
-              --swiper-navigation-color: #fff;
-              --swiper-pagination-color: #fff;
-            "
-            class="swiper sliderBig"
-          >
-            <swiper
-              class="swiper-wrapper"
-              ref="mainSwiper"
-              :loop="true"
-              :speed="1000"
-              :rtl="true"
-              :parallax="true"
-              @slideChange="onSlideChange"
-              :navigation="true"
-              :thumbs="{ swiper: thumbsSwiper }"
-            >
-              <swiper-slide
-                class="swiper-slide"
-                v-for="(brand, index) in popularBrands"
-                :key="index"
-              >
-                <div class="row align-items-center">
-                  <div class="col-sm-6 position-relative">
-                    <h3 class="slider-watermark-title">
-                      {{
-                        locale == "en"
-                          ? brand?.products[0]?.name_en
-                          : brand?.products[0]?.name_ar
-                      }}
-                    </h3>
-                    <div class="slider-content">
-                      <h2
-                        :class="{ 'xyz-in': activeIndex == index }"
-                        :xyz="
-                          activeFlag == true
-                            ? 'fade ease-in left-25% duration-10'
-                            : 'fade ease-in right-25% duration-10'
-                        "
-                      >
-                        {{
-                          locale == "en"
-                            ? brand?.products[0]?.name_en
-                            : brand?.products[0]?.name_ar
-                        }}
-                      </h2>
-                      <h4>
-                        {{
-                          locale == "en"
-                            ? brand?.product?.text_en
-                            : brand?.product?.text_ar
-                        }}
-                      </h4>
-                      <div
-                        class="vehicle-specifications"
-                        :class="{ 'xyz-in': activeIndex == index }"
-                        :xyz="
-                          activeFlag == true
-                            ? 'fade ease-in up-50% duration-10'
-                            : 'fade ease-in down-50% duration-10'
-                        "
-                      >
-                        <div class="spec-box">
-                          <img
-                            src="@/assets/images/icon-dashboard.png"
-                            class="img-fluid"
-                            alt=""
-                          />
-                          <h5>
-                            {{ brand?.products[0]?.power }}
-                            <small>KW</small>
-                          </h5>
-                          <span>{{ $t("power") }}</span>
-                        </div>
-                        <div class="spec-box">
-                          <img
-                            src="@/assets/images/icon-dashboard.png"
-                            class="img-fluid"
-                            alt=""
-                          />
-                          <h5>
-                            {{ brand?.products[0]?.torque }}
-                            <small>N.M</small>
-                          </h5>
-                          <span>{{ $t("torque") }}</span>
-                        </div>
-                        <div class="spec-box">
-                          <img
-                            src="@/assets/images/icon-dashboard.png"
-                            class="img-fluid"
-                            alt=""
-                          />
-                          <h5>
-                            {{ brand?.products[0]?.wheelbase }}
-                            <small>S</small>
-                          </h5>
-                          <span>{{ $t("wheelbase") }}</span>
-                        </div>
-                      </div>
-                      <p
-                        :class="{ 'xyz-in': activeIndex == index }"
-                        :xyz="
-                          activeFlag == true
-                            ? 'fade ease-in left-25% duration-10'
-                            : 'fade ease-in right-25% duration-10'
-                        "
-                      >
-                        {{
-                          locale == "en"
-                            ? brand?.products[0]?.description_en
-                            : brand?.products[0]?.description_ar
-                        }}
-                      </p>
-                      <div class="vehicle-variations">
-                        <div
-                          class="vbox"
-                          v-for="(product, prdIndex) in brand?.products"
-                          :key="prdIndex"
-                        >
-                          <NuxtLink :to="product?.link" target="_blank">
-                            <img :src="product?.image" alt=""
-                          /></NuxtLink>
-                          {{
-                            locale == "en" ? product?.name_en : product?.name_ar
-                          }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="slider-image">
-                      <img
-                        v-if="brand?.products[0]"
-                        class="img-fluid"
-                        :class="{ 'xyz-in': activeIndex == index }"
-                        :xyz="
-                          activeFlag == true
-                            ? 'fade ease-in up-75% duration-10'
-                            : 'fade ease-in down-75% duration-10'
-                        "
-                        :src="brand?.products[0]?.image"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                </div>
-              </swiper-slide>
-            </swiper>
-            <!-- <button class="swiper-button-prev" @click="goToPrevSlide"></button>
-            <button class="swiper-button-next" @click="goToNextSlide"></button> -->
-          </div>
-          <div thumbsSlider="" class="swiper sliderThumbs">
-            <swiper
-              class="swiper-wrapper"
-              ref="thumbsSwiper"
-              @swiper="onSwiper"
-              :centeredSlides="true"
-              :centeredSlidesBounds="true"
-              :slidesPerView="4"
-              :watchOverflow="true"
-              :watchSlidesVisibility="true"
-              :watchSlidesProgress="true"
-            >
-              <swiper-slide
-                class="swiper-slide"
-                v-for="(brand, index) in popularBrands"
-                :key="index"
-                @click="onBrandClick()"
-              >
-                <img :src="brand?.image" alt="" />
-              </swiper-slide>
-            </swiper>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Main Slider End -->
+    <Head v-if="homeObj">
+      <Title>{{ typeof homeObj?.meta_title !== undefined ? homeObj?.meta_title : "" }}</Title>
+      <Meta name="description" :content="typeof homeObj?.meta_description !== undefined ? homeObj?.meta_description : ''" />
+    </Head>
     <!-- Section About Start -->
     <section class="section-about">
       <div class="container-fluid p-0">
@@ -233,12 +42,9 @@
             </div>
           </div>
           <div class="col-sm-3 mission-vision-content">
-            <div
-              class="vision-box"
-              :style="{
-                backgroundImage: `url(${background_vision})`,
-              }"
-            >
+            <div class="vision-box" :style="{
+              backgroundImage: `url(${background_vision})`,
+            }">
               <div class="cnt-box">
                 <h3>
                   {{
@@ -256,12 +62,9 @@
                 </p>
               </div>
             </div>
-            <div
-              class="mission-box"
-              :style="{
-                backgroundImage: `url(${background_mision})`,
-              }"
-            >
+            <div class="mission-box" :style="{
+              backgroundImage: `url(${background_mision})`,
+            }">
               <div class="cnt-box">
                 <h3>
                   {{
@@ -293,8 +96,8 @@
             <div class="author-info">
               <img :src="homeObj?.owner_image" class="img-fluid" alt="" />
               <h3>
-                <span>{{ homeObj?.owner_name }}</span>
-                {{ homeObj?.owner_designation }}
+                <span>{{ homeObj?.owner_name || "H.E. MARWAN AL SHAALI" }}</span>
+                {{ homeObj?.owner_designation || "CHAIRMAN & FOUNDER" }}
               </h3>
             </div>
           </div>
@@ -320,13 +123,144 @@
       </div>
     </section>
     <!-- Section Testimonial End-->
+    <!-- Main Slider Start -->
+    <section class="section-slider">
+      <div class="container">
+        <div class="mainSlider">
+
+          <div style="
+              --swiper-navigation-color: #fff;
+              --swiper-pagination-color: #fff;
+            " class="swiper sliderBig">
+            <swiper class="swiper-wrapper" ref="mainSwiper" :loop="true" :speed="1000" :rtl="true" :parallax="true"
+              @slideChange="onSlideChange" :navigation="true" :thumbs="{ swiper: thumbsSwiper }">
+              <swiper-slide class="swiper-slide" v-for="(brand, index) in popularBrands" :key="index">
+                <div class="row align-items-center">
+                  <div class="col-sm-6 position-relative">
+                    <h3 class="slider-watermark-title">
+                      {{
+                        locale == "en"
+                          ? brand?.products[0]?.name_en
+                          : brand?.products[0]?.name_ar
+                      }}
+                    </h3>
+                    <div class="slider-content">
+                      <div class="text-end mb-4">
+                        <NuxtLink to="/products" class="link-viewall xyz-in"><span class="" :xyz="activeFlag == true
+                          ? 'fade ease-in up-75% '
+                          : 'fade ease-in down-75%'
+                          ">
+                            {{ popularBrandName }}</span>
+                          <i class="fa-solid fa-arrow-right-long"></i>
+                        </NuxtLink>
+                      </div>
+                      <h2 :class="{ 'xyz-in': activeIndex == index }" :xyz="activeFlag == true
+                        ? 'fade ease-in left-25% duration-10'
+                        : 'fade ease-in right-25% duration-10'
+                        ">
+                        {{
+                          locale == "en"
+                            ? brand?.products[0]?.name_en
+                            : brand?.products[0]?.name_ar
+                        }}
+                      </h2>
+                      <h4>
+                        {{
+                          locale == "en"
+                            ? brand?.product?.text_en
+                            : brand?.product?.text_ar
+                        }}
+                      </h4>
+                      <div class="vehicle-specifications" :class="{ 'xyz-in': activeIndex == index }" :xyz="activeFlag == true
+                        ? 'fade ease-in up-50% duration-15'
+                        : 'fade ease-in down-50% duration-15'
+                        ">
+                        <div class="spec-box">
+                          <img src="@/assets/images/icon-dashboard.png" class="img-fluid" alt="" />
+                          <h5>
+                            {{ brand?.products[0]?.power }}
+                            <small>KW</small>
+                          </h5>
+                          <span>{{ $t("power") }}</span>
+                        </div>
+                        <div class="spec-box">
+                          <img src="@/assets/images/icon-dashboard.png" class="img-fluid" alt="" />
+                          <h5>
+                            {{ brand?.products[0]?.torque }}
+                            <small>N.M</small>
+                          </h5>
+                          <span>{{ $t("torque") }}</span>
+                        </div>
+                        <div class="spec-box">
+                          <img src="@/assets/images/icon-dashboard.png" class="img-fluid" alt="" />
+                          <h5>
+                            {{ brand?.products[0]?.wheelbase }}
+                            <small>S</small>
+                          </h5>
+                          <span>{{ $t("wheelbase") }}</span>
+                        </div>
+                      </div>
+                      <p :class="{ 'xyz-in': activeIndex == index }" :xyz="activeFlag == true
+                        ? 'fade ease-in left-25% duration-10'
+                        : 'fade ease-in right-25% duration-10'
+                        ">
+                        {{
+                          locale == "en"
+                            ? brand?.products[0]?.description_en
+                            : brand?.products[0]?.description_ar
+                        }}
+                      </p>
+                      <div class="vehicle-variations">
+                        <div class="vbox" v-for="(product, prdIndex) in brand?.products" :key="prdIndex">
+                          <NuxtLink :to="product?.link" target="_blank">
+                            <img :src="product?.image" alt="" />
+                          </NuxtLink>
+                          {{
+                            locale == "en" ? product?.name_en : product?.name_ar
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="slider-image">
+                      <img v-if="brand?.products[0]" class="img-fluid" :class="{ 'xyz-in': activeIndex == index }" :xyz="activeFlag == true
+                        ? 'fade ease-in up-50% duration-15'
+                        : 'fade ease-in down-50% duration-15'
+                        " :src="brand?.products[0]?.image" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </swiper-slide>
+            </swiper>
+            <!-- <button class="swiper-button-prev" @click="goToPrevSlide"></button>
+            <button class="swiper-button-next" @click="goToNextSlide"></button> -->
+          </div>
+          <div thumbsSlider="" class="swiper sliderThumbs">
+            <swiper class="swiper-wrapper" ref="thumbsSwiper" @swiper="onSwiper" :centeredSlides="true"
+              :centeredSlidesBounds="true" :slidesPerView="4" :watchOverflow="true" :watchSlidesVisibility="true"
+              :watchSlidesProgress="true">
+              <swiper-slide class="swiper-slide" v-for="(brand, index) in popularBrands" :key="index"
+                @click="onBrandClick()">
+                <img :src="brand?.image" alt="" />
+              </swiper-slide>
+            </swiper>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Main Slider End -->
 
     <!-- Section Benefits Start -->
-    <section class="section-benefits">
-      <div class="benefits-top text-center">
+    <section class="section-benefits" :style="{
+      backgroundImage: `url(${homeObj?.our_benefit_background_image})`
+    }">
+      <div class="benefits-top text-center" :style="{
+        '--mobile-bg': `url(${homeObj?.our_benefit_background_image})`
+      }">
         <div class="container">
           <div class="row">
-            <div class="col-sm-12 col-lg-10 m-auto">
+            <div class="col-sm-12 col-lg-10 m-auto mt-5">
               <h4>
                 {{
                   locale == "en"
@@ -359,11 +293,7 @@
               <div class="row">
                 <div class="col-sm-4">
                   <div class="award-box">
-                    <img
-                      :src="homeObj?.our_benefit_image1"
-                      class="img-fluid"
-                      alt=""
-                    />
+                    <img :src="homeObj?.our_benefit_image1" class="img-fluid" alt="" />
                     <h5>
                       {{
                         locale == "en"
@@ -375,11 +305,7 @@
                 </div>
                 <div class="col-sm-4">
                   <div class="award-box">
-                    <img
-                      :src="homeObj?.our_benefit_image2"
-                      class="img-fluid"
-                      alt=""
-                    />
+                    <img :src="homeObj?.our_benefit_image2" class="img-fluid" alt="" />
                     <h5>
                       {{
                         locale == "en"
@@ -391,11 +317,7 @@
                 </div>
                 <div class="col-sm-4">
                   <div class="award-box">
-                    <img
-                      :src="homeObj?.our_benefit_image3"
-                      class="img-fluid"
-                      alt=""
-                    />
+                    <img :src="homeObj?.our_benefit_image3" class="img-fluid" alt="" />
                     <h5>
                       {{
                         locale == "en"
@@ -435,9 +357,7 @@
               </h4>
             </div>
             <div class="subscribe-logos">
-              <a href="#" v-for="(brand, index) in homeObj?.brands" :key="index"
-                ><img :src="brand?.image" alt=""
-              /></a>
+              <a href="#" v-for="(brand, index) in homeObj?.brands" :key="index"><img :src="brand?.image" alt="" /></a>
             </div>
           </div>
         </div>

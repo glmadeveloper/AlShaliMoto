@@ -21,28 +21,17 @@
           </div>
           <div class="col-sm-3">
             <div class="contact-cta">
-              <a :href="`tel:${commonObj?.phone_number}`" class="cta-phone"
-                >+{{ commonObj?.phone_number }}</a
-              >
+              <a :href="`tel:${commonObj?.phone_number}`" class="cta-phone">{{
+                formatPhoneNumber(commonObj?.phone_number) }}</a>
             </div>
           </div>
           <div class="col-sm-5">
             <div class="social-network">
-              <a :href="`mailto:${commonObj?.email}`" class="cta-email"
-                ><i class="fa-solid fa-envelope"></i
-              ></a>
-              <NuxtLink :to="commonObj?.facebook" target="_blank"
-                ><i class="fa-brands fa-facebook-f"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.instagram" target="_blank"
-                ><i class="fa-brands fa-instagram"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.linkedin" target="_blank"
-                ><i class="fa-brands fa-linkedin-in"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.twitter" target="_blank"
-                ><i class="fa-brands fa-x-twitter"></i
-              ></NuxtLink>
+              <a :href="`mailto:${commonObj?.email}`" class="cta-email"><i class="fa-solid fa-envelope"></i></a>
+              <NuxtLink :to="commonObj?.facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></NuxtLink>
+              <NuxtLink :to="commonObj?.instagram" target="_blank"><i class="fa-brands fa-instagram"></i></NuxtLink>
+              <NuxtLink :to="commonObj?.linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></NuxtLink>
+              <!-- <NuxtLink :to="commonObj?.twitter" target="_blank"><i class="fa-brands fa-x-twitter"></i></NuxtLink> -->
             </div>
           </div>
         </div>
@@ -72,25 +61,13 @@
                   }}</NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink
-                    to="/products"
-                    :class="{ active: isActive('products') }"
-                    >{{ $t("products") }}</NuxtLink
-                  >
+                  <NuxtLink to="/products" :class="{ active: isActive('products') }">{{ $t("products") }}</NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink
-                    to="aboutus"
-                    :class="{ active: isActive('aboutus') }"
-                    >{{ $t("aboutus") }}</NuxtLink
-                  >
+                  <NuxtLink to="aboutus" :class="{ active: isActive('aboutus') }">{{ $t("aboutus") }}</NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink
-                    to="contactus"
-                    :class="{ active: isActive('contactus') }"
-                    >{{ $t("contactus") }}</NuxtLink
-                  >
+                  <NuxtLink to="contactus" :class="{ active: isActive('contactus') }">{{ $t("contactus") }}</NuxtLink>
                 </li>
               </ul>
             </div>
@@ -143,6 +120,7 @@
 <script>
 import { useRoute } from "vue-router";
 import { useCommonStore } from "../store/modules/common";
+import { formatPhoneNumber } from "../helpers/formatters";
 export default {
   setup() {
     const route = useRoute();
@@ -169,6 +147,9 @@ export default {
       return this.commonStore.getCommon;
     },
   },
-  mounted() {},
+  mounted() { },
+  methods: {
+    formatPhoneNumber,
+  },
 };
 </script>

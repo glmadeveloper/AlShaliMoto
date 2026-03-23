@@ -1,5 +1,11 @@
 <template>
   <div>
+
+    <Head v-if="contactusObj">
+      <Title>{{ typeof contactusObj?.meta_title !== 'undefined' ? contactusObj?.meta_title : "" }}</Title>
+      <Meta name="description"
+        :content="typeof contactusObj?.meta_description !== 'undefined' ? contactusObj?.meta_description : ''" />
+    </Head>
     <!-- Page Heading Start -->
     <section class="section-page-heading">
       <div class="heading-image">
@@ -16,8 +22,7 @@
             <span>
               {{
                 locale == "en" ? contactusObj?.name_en : contactusObj?.name_ar
-              }}</span
-            >
+              }}</span>
           </div>
         </div>
       </div>
@@ -55,18 +60,10 @@
           </div>
           <div class="col-sm-4">
             <div class="social-links">
-              <NuxtLink :to="commonObj?.facebook" target="_blank"
-                ><i class="fa-brands fa-facebook-f"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.instagram" target="_blank"
-                ><i class="fa-brands fa-instagram"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.linkedin" target="_blank"
-                ><i class="fa-brands fa-linkedin-in"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.twitter" target="_blank"
-                ><i class="fa-brands fa-x-twitter"></i
-              ></NuxtLink>
+              <NuxtLink :to="commonObj?.facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></NuxtLink>
+              <NuxtLink :to="commonObj?.instagram" target="_blank"><i class="fa-brands fa-instagram"></i></NuxtLink>
+              <NuxtLink :to="commonObj?.linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></NuxtLink>
+              <NuxtLink :to="commonObj?.twitter" target="_blank"><i class="fa-brands fa-x-twitter"></i></NuxtLink>
             </div>
           </div>
         </div>
@@ -80,7 +77,7 @@
           <div class="col-sm-4">
             <div class="contact-infobox">
               <span><i class="fa-solid fa-phone"></i></span>
-              +{{ commonObj?.phone_number }}
+              {{ formatPhoneNumber(commonObj?.phone_number) }}
             </div>
           </div>
           <div class="col-sm-4">
@@ -92,14 +89,8 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <Form
-              as="form"
-              class="form"
-              @submit="onSubmit"
-              :initial-values="initialData"
-              :validation-schema="schema"
-              v-slot="{ errors }"
-            >
+            <Form as="form" class="form" @submit="onSubmit" :initial-values="initialData" :validation-schema="schema"
+              v-slot="{ errors }">
               <div class="contact-box">
                 <div class="form-group">
                   <div class="field-group">
@@ -113,12 +104,7 @@
                         class="form-control"
                         placeholder="Please enter your name"
                       /> -->
-                        <Field
-                          type="text"
-                          name="name"
-                          class="form-control"
-                          :placeholder="$t('pleaseEnterYourName')"
-                        />
+                        <Field type="text" name="name" class="form-control" :placeholder="$t('pleaseEnterYourName')" />
                       </div>
                     </div>
                   </div>
@@ -138,12 +124,8 @@
                         class="form-control"
                         placeholder="Please enter your email"
                       /> -->
-                        <Field
-                          type="text"
-                          name="email"
-                          class="form-control"
-                          :placeholder="$t('pleaseEnterYourEmail')"
-                        />
+                        <Field type="text" name="email" class="form-control"
+                          :placeholder="$t('pleaseEnterYourEmail')" />
                       </div>
                     </div>
                   </div>
@@ -163,12 +145,8 @@
                         class="form-control"
                         placeholder="Please enter your number"
                       /> -->
-                        <Field
-                          type="text"
-                          name="mobileNumber"
-                          class="form-control"
-                          :placeholder="$t('pleaseEnterYourNumber')"
-                        />
+                        <Field type="text" name="mobileNumber" class="form-control"
+                          :placeholder="$t('pleaseEnterYourNumber')" />
                       </div>
                     </div>
                   </div>
@@ -186,14 +164,8 @@
                         rows="8"
                         placeholder="Enter message"
                       ></textarea> -->
-                        <Field
-                          type="text"
-                          as="textarea"
-                          rows="5"
-                          name="message"
-                          class="form-control"
-                          :placeholder="$t('pleaseEnterYourMessage')"
-                        ></Field>
+                        <Field type="text" as="textarea" rows="5" name="message" class="form-control"
+                          :placeholder="$t('pleaseEnterYourMessage')"></Field>
                       </div>
                     </div>
                   </div>
@@ -224,6 +196,7 @@ import { Field, Form } from "vee-validate";
 import * as yup from "yup";
 import { useContactUsStore } from "~/store/modules/contactus";
 import { useCommonStore } from "~/store/modules/common";
+import { formatPhoneNumber } from "~/helpers/formatters";
 export default {
   layout: "default",
   components: {
@@ -287,6 +260,7 @@ export default {
     this.fetchContactUs();
   },
   methods: {
+    formatPhoneNumber,
     fetchContactUs() {
       this.contactStore.fetchContactUs();
     },

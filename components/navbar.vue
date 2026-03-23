@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header-top">
+    <!-- <div class="header-top">
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
@@ -23,150 +23,74 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <NuxtLink class="navbar-brand" to="/">
           <img :src="commonObj?.header_logo" class="img-fluid" alt="" />
         </NuxtLink>
 
-        <div
-          class="navbar-collapse"
-          :class="!visible ? 'collapse' : ''"
-          id="navbarSupportedContent"
-        >
+        <div class="navbar-collapse" :class="!visible ? 'collapse' : ''" id="navbarSupportedContent">
           <div>
-            <button
-              class="navbar-toggler navbar-toggler-mb"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-              @click="visible = !visible"
-            >
-              <img
-                src="@/assets/images/icon-close.png"
-                class="img-fluid"
-                alt=""
-              />
+            <button class="navbar-toggler navbar-toggler-mb" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation" @click="visible = !visible">
+              <img src="@/assets/images/icon-close.png" class="img-fluid" alt="" />
             </button>
             <NuxtLink class="navbar-brand navbar-brand-mb" to="/">
-              <img
-                src="@/assets/images/logo-white.png"
-                class="img-fluid"
-                alt=""
-              />
+              <img src="@/assets/images/logo-white.png" class="img-fluid" alt="" />
             </NuxtLink>
           </div>
           <ul class="navbar-nav m-auto">
             <li class="nav-item">
-              <NuxtLink
-                class="nav-link"
-                :class="{ active: isActive('index') }"
-                to="/"
-                @click="visible = !visible"
-                >{{ $t("home") }}</NuxtLink
-              >
+              <NuxtLink class="nav-link" :class="{ active: isActive('index') }" to="/" @click="visible = !visible">{{
+                $t("home") }}</NuxtLink>
             </li>
             <li class="nav-item">
-              <NuxtLink
-                class="nav-link"
-                :class="{ active: isActive('aboutus') }"
-                to="/aboutus"
-                @click="visible = !visible"
-                >{{ $t("aboutus") }}</NuxtLink
-              >
+              <NuxtLink class="nav-link" :class="{ active: isActive('aboutus') }" to="/aboutus"
+                @click="visible = !visible">{{ $t("aboutus") }}</NuxtLink>
             </li>
             <li class="nav-item">
-              <NuxtLink
-                class="nav-link"
-                :class="{ active: isActive('products') }"
-                to="products"
-                @click="visible = !visible"
-                >{{ $t("products") }}</NuxtLink
-              >
+              <NuxtLink class="nav-link" :class="{ active: isActive('products') }" to="products"
+                @click="visible = !visible">{{ $t("products") }}</NuxtLink>
             </li>
             <li class="nav-item">
-              <NuxtLink
-                class="nav-link"
-                :class="{ active: isActive('contactus') }"
-                to="/contactus"
-                @click="visible = !visible"
-                >{{ $t("contactus") }}</NuxtLink
-              >
+              <NuxtLink class="nav-link" :class="{ active: isActive('contactus') }" to="/contactus"
+                @click="visible = !visible">{{ $t("contactus") }}</NuxtLink>
             </li>
           </ul>
           <div class="header-right ms-auto">
             <div class="header-contact">
-              <a :href="`tel:${commonObj?.phone_number}`" class="contact-phone"
-                >+{{ commonObj?.phone_number }}</a
-              >
+              <a :href="`tel:${commonObj?.phone_number}`" class="contact-phone">{{
+                formatPhoneNumber(commonObj?.phone_number) }}</a>
             </div>
             <div class="header-social">
-              <a :href="`mailto:${commonObj?.email}`" class="contact-email"
-                ><i class="fa-solid fa-envelope"></i
-              ></a>
-              <NuxtLink :to="commonObj?.facebook" target="_blank"
-                ><i class="fa-brands fa-facebook-f"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.instagram" target="_blank"
-                ><i class="fa-brands fa-instagram"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.linkedin" target="_blank"
-                ><i class="fa-brands fa-linkedin-in"></i
-              ></NuxtLink>
-              <NuxtLink :to="commonObj?.twitter" target="_blank"
-                ><i class="fa-brands fa-x-twitter"></i
-              ></NuxtLink>
+              <a :href="`mailto:${commonObj?.email}`" class="contact-email"><i class="fa-solid fa-envelope"></i></a>
+              <NuxtLink :to="commonObj?.facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></NuxtLink>
+              <NuxtLink :to="commonObj?.instagram" target="_blank"><i class="fa-brands fa-instagram"></i></NuxtLink>
+              <NuxtLink :to="commonObj?.linkedin" target="_blank"><i class="fa-brands fa-linkedin-in"></i></NuxtLink>
+              <!-- <NuxtLink :to="commonObj?.twitter" target="_blank"><i class="fa-brands fa-x-twitter"></i></NuxtLink> -->
             </div>
           </div>
         </div>
         <div class="dropdown d-flex ms-auto">
-          <a
-            class="btn-lang dropdown-toggle"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="btn-lang dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+            aria-expanded="false">
             {{ lang }}
           </a>
 
-          <ul
-            class="dropdown-menu dropdown-menu-lang"
-            aria-labelledby="dropdownMenuLink"
-          >
+          <ul class="dropdown-menu dropdown-menu-lang" aria-labelledby="dropdownMenuLink">
             <li>
-              <NuxtLink
-                class="dropdown-item"
-                to=""
-                @click="() => onClickLang('en')"
-                >EN</NuxtLink
-              >
+              <NuxtLink class="dropdown-item" to="" @click="() => onClickLang('en')">EN</NuxtLink>
             </li>
             <li>
-              <NuxtLink
-                class="dropdown-item"
-                to=""
-                @click="() => onClickLang('ar')"
-                >AR</NuxtLink
-              >
+              <NuxtLink class="dropdown-item" to="" @click="() => onClickLang('ar')">AR</NuxtLink>
             </li>
           </ul>
         </div>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          @click="visible = !visible"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+          @click="visible = !visible">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
@@ -176,6 +100,7 @@
 <script>
 import { useRoute } from "vue-router";
 import { useCommonStore } from "../store/modules/common";
+import { formatPhoneNumber } from "../helpers/formatters";
 export default {
   setup() {
     const route = useRoute();
@@ -204,8 +129,9 @@ export default {
       return this.commonStore.getCommon;
     },
   },
-  mounted() {},
+  mounted() { },
   methods: {
+    formatPhoneNumber,
     onClickLang(language) {
       if (language == "ar") {
         localStorage.setItem("language", "ar");

@@ -1,68 +1,39 @@
 <template>
   <div>
+
+    <Head v-if="productObj">
+      <Title>{{ typeof productObj?.meta_title !== 'undefined' ? productObj?.meta_title : "" }}</Title>
+      <Meta name="description"
+        :content="typeof productObj?.meta_description !== 'undefined' ? productObj?.meta_description : ''" />
+    </Head>
     <!-- Section Content Start -->
     <section class="section-products bg-white">
       <div class="products-tabs">
         <div class="container">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li
-              class="nav-item"
-              role="presentation"
-              v-for="(brand, index) in brandsArr"
-              :key="index"
-            >
-              <button
-                class="nav-link"
-                :class="{ active: activeTab == index }"
-                @click="selectTab(index)"
-                :aria-controls="brand.id"
-                :key="index"
-                :data-bs-target="brand.id"
-                :id="brand.id"
-                data-bs-toggle="tab"
-                type="button"
-                role="tab"
-                aria-selected="true"
-              >
+            <li class="nav-item" role="presentation" v-for="(brand, index) in brandsArr" :key="index">
+              <button class="nav-link" :class="{ active: activeTab == index }" @click="selectTab(index)"
+                :aria-controls="brand.id" :key="index" :data-bs-target="brand.id" :id="brand.id" data-bs-toggle="tab"
+                type="button" role="tab" aria-selected="true">
                 <img :src="brand?.image" alt="" />
               </button>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div
-              class="tab-pane fade"
-              v-for="(brand, index) in brandsArr"
-              :key="index"
-              :id="brand.id"
-              role="tabpanel"
+            <div class="tab-pane fade" v-for="(brand, index) in brandsArr" :key="index" :id="brand.id" role="tabpanel"
               :class="{
                 show: activeTab === index,
                 active: activeTab === index,
-              }"
-              :aria-labelledby="brand.id"
-            >
+              }" :aria-labelledby="brand.id">
               <!-- Slider main container -->
               <div class="productSlider">
                 <div class="swiper sliderBaic">
                   <!-- Additional required wrapper -->
-                  <swiper
-                    class="swiper-wrapper"
-                    ref="swiperRef"
-                    :slides-per-view="1"
-                    :space-between="1"
-                    :loop="true"
-                    :autoHeight="true"
-                    :pagination="true"
-                    @swiper="onSwiper"
-                    :modules="modules"
-                    :navigation="true"
-                  >
+                  <swiper class="swiper-wrapper" ref="swiperRef" :slides-per-view="1" :space-between="1" :loop="true"
+                    :autoHeight="true" :pagination="true" @swiper="onSwiper" :modules="modules" :navigation="true">
                     <!-- Slides -->
-                    <swiper-slide
-                      class="swiper-slide"
-                      v-for="(product, prdIndex) in brand?.popular_products"
-                      :key="prdIndex"
-                    >
+                    <swiper-slide class="swiper-slide" v-for="(product, prdIndex) in brand?.popular_products"
+                      :key="prdIndex">
                       <div class="row align-items-center">
                         <div class="col-sm-6">
                           <div class="slider-content">
@@ -82,29 +53,17 @@
                             </p>
                             <div class="vehicle-specifications">
                               <div class="spec-box">
-                                <img
-                                  src="@/assets/images/icon-dashboard.png"
-                                  class="img-fluid"
-                                  alt=""
-                                />
+                                <img src="@/assets/images/icon-dashboard.png" class="img-fluid" alt="" />
                                 <h5>{{ product?.power }} kw</h5>
                                 <span>{{ $t("power") }}</span>
                               </div>
                               <div class="spec-box">
-                                <img
-                                  src="@/assets/images/icon-dashboard.png"
-                                  class="img-fluid"
-                                  alt=""
-                                />
+                                <img src="@/assets/images/icon-dashboard.png" class="img-fluid" alt="" />
                                 <h5>{{ product?.torque }} kw</h5>
                                 <span>{{ $t("torque") }}</span>
                               </div>
                               <div class="spec-box">
-                                <img
-                                  src="@/assets/images/icon-dashboard.png"
-                                  class="img-fluid"
-                                  alt=""
-                                />
+                                <img src="@/assets/images/icon-dashboard.png" class="img-fluid" alt="" />
                                 <h5>{{ product?.wheelbase }} kw</h5>
                                 <span>{{ $t("wheelbase") }}</span>
                               </div>
@@ -120,11 +79,7 @@
                         </div>
                         <div class="col-sm-6">
                           <div class="slider-image">
-                            <img
-                              :src="product?.image"
-                              class="img-fluid"
-                              alt=""
-                            />
+                            <img :src="product?.image" class="img-fluid" alt="" />
                           </div>
                         </div>
                       </div>
@@ -145,11 +100,7 @@
 
               <div class="products-wrapper">
                 <div class="row">
-                  <div
-                    class="col-sm-3"
-                    v-for="(product, prdIndex) in brand?.products"
-                    :key="prdIndex"
-                  >
+                  <div class="col-sm-3" v-for="(product, prdIndex) in brand?.products" :key="prdIndex">
                     <div class="product-box">
                       <div class="product-image">
                         <img :src="product?.image" class="img-fluid" alt="" />
@@ -207,7 +158,7 @@ export default {
       locale: this.$i18n.locale,
       swiperInstance: null,
       productsStore: useProductsStore(),
-      activeTab: 1,
+      activeTab: 0,
     };
   },
   computed: {

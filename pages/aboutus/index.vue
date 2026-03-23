@@ -1,5 +1,10 @@
 <template>
   <div>
+
+    <Head v-if="aboutusObj">
+      <Title>{{ typeof aboutusObj?.meta_title !== undefined ? aboutusObj?.meta_title : "" }}</Title>
+      <Meta name="description" :content="typeof aboutusObj?.meta_description !== undefined ? aboutusObj?.meta_description : ''" />
+    </Head>
     <!-- Page Heading Start -->
     <section class="section-page-heading">
       <div class="heading-image">
@@ -26,11 +31,7 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="exp-img">
-              <img
-                src="@/assets/images/exp.png"
-                class="img-fluid d-flex m-auto"
-                alt=""
-              />
+              <img src="@/assets/images/exp.png" class="img-fluid d-flex m-auto" alt="" />
             </div>
           </div>
           <div class="col-sm-8">
@@ -196,12 +197,8 @@
     </section>
     <section class="section-countries">
       <div class="container">
-        <div class="row row-locations">
-          <div
-            class="col col-6 col-sm-4 col-lg-2"
-            v-for="(location, index) in aboutusObj?.locations"
-            :key="index"
-          >
+        <div class="row row-locations justify-content-center">
+          <div class="col col-6 col-sm-4 col-lg-2" v-for="(location, index) in aboutusObj?.locations" :key="index">
             <div class="location-box">
               <img :src="location?.image" class="img-fluid" alt="" />
               <h4>
@@ -236,12 +233,8 @@
               </h4>
             </div>
             <div class="subscribe-logos">
-              <a
-                href="#"
-                v-for="(brand, index) in aboutusObj?.brands"
-                :key="index"
-                ><img :src="brand?.image" alt=""
-              /></a>
+              <a href="#" v-for="(brand, index) in aboutusObj?.brands" :key="index"><img :src="brand?.image"
+                  alt="" /></a>
               <!-- <a href="#"><img src="@/assets/images/baic.jpg" alt="" /></a>
               <a href="#"><img src="@/assets/images/cfmoto.jpg" alt="" /></a>
               <a href="#"
@@ -257,14 +250,9 @@
 
     <!-- Section Features Start -->
     <section class="section-features">
-      <div
-        v-for="(service, index) in aboutusObj?.services"
-        :key="index"
-        class="column"
-        :style="{
-          backgroundImage: `url(${service?.image})`,
-        }"
-      >
+      <div v-for="(service, index) in aboutusObj?.services" :key="index" class="column" :style="{
+        backgroundImage: `url(${service?.image})`,
+      }">
         <h4>{{ locale == "en" ? service?.name_en : service?.name_ar }}</h4>
       </div>
       <!-- <div
