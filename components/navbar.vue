@@ -60,10 +60,10 @@
             </li>
           </ul>
           <div class="header-right ms-auto">
-            <div class="header-contact">
+            <bdi class="header-contact">
               <a :href="`tel:${commonObj?.phone_number}`" class="contact-phone">{{
                 formatPhoneNumber(commonObj?.phone_number) }}</a>
-            </div>
+            </bdi>
             <div class="header-social">
               <a :href="`mailto:${commonObj?.email}`" class="contact-email"><i class="fa-solid fa-envelope"></i></a>
               <NuxtLink :to="commonObj?.facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></NuxtLink>

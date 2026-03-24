@@ -20,10 +20,10 @@
             </div>
           </div>
           <div class="col-sm-3">
-            <div class="contact-cta">
+            <bdi class="contact-cta">
               <a :href="`tel:${commonObj?.phone_number}`" class="cta-phone">{{
                 formatPhoneNumber(commonObj?.phone_number) }}</a>
-            </div>
+            </bdi>
           </div>
           <div class="col-sm-5">
             <div class="social-network">

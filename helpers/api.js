@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseAPI = axios.create({
-  baseURL: "https://alshaaliadmin.glmaagencyprojects.com/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 export default baseAPI;
