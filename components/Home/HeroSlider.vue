@@ -4,7 +4,8 @@
             <swiper class="swiper-wrapper" :loop="true" :speed="1000"
                 :autoplay="{ delay: 5000, disableOnInteraction: false }" :modules="modules">
                 <swiper-slide v-for="(banner, index) in heroBanners" :key="index">
-                    <div class="hero-banner" :style="{ backgroundImage: `url(${banner.image})` }">
+                    <div class="hero-banner"
+                        :style="{ backgroundImage: `url(${isMobile ? (banner.mobile_image || banner.image) : banner.image})` }">
                         <div class="container h-100">
                             <div class="row h-100 align-items-center justify-content-start">
                                 <div class="col-md-7 col-lg-6"
@@ -26,6 +27,7 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import { ref, onMounted, onUnmounted } from 'vue';
 
 export default {
     components: {
@@ -34,8 +36,24 @@ export default {
     },
     props: ["homeObj", "locale"],
     setup() {
+        const isMobile = ref(false);
+
+        const checkMobile = () => {
+            isMobile.value = window.innerWidth <= 768;
+        };
+
+        onMounted(() => {
+            checkMobile();
+            window.addEventListener('resize', checkMobile);
+        });
+
+        onUnmounted(() => {
+            window.removeEventListener('resize', checkMobile);
+        });
+
         return {
             modules: [Autoplay],
+            isMobile
         };
     },
     computed: {
