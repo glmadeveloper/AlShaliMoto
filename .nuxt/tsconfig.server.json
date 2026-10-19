@@ -3,6 +3,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noEmit": true,
+    "skipLibCheck": true,
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
@@ -17,71 +18,70 @@
         "./types/nitro-imports"
       ],
       "~/*": [
-        "../*",
         "../*"
       ],
       "@/*": [
-        "../*",
         "../*"
       ],
       "~~/*": [
-        "../*",
         "../*"
       ],
       "@@/*": [
-        "../*",
         "../*"
       ],
-      "nitropack": [
-        "../node_modules/nitropack"
-      ],
-      "defu": [
-        "../node_modules/defu"
-      ],
-      "h3": [
-        "../node_modules/h3"
-      ],
-      "consola": [
-        "../node_modules/consola"
-      ],
-      "ofetch": [
-        "../node_modules/ofetch"
+      "nuxt": [
+        "../node_modules/.pnpm/nuxt@3.21.11_@oxc-project+t_999915fe6e4176ef2f775bbb2a141a56/node_modules/nuxt"
       ],
       "@unhead/vue": [
-        "../node_modules/@unhead/vue"
+        "../node_modules/.pnpm/@unhead+vue@2.1.17_vue@3.5.44/node_modules/@unhead/vue"
       ],
       "@nuxt/devtools": [
-        "../node_modules/@nuxt/devtools"
+        "../node_modules/.pnpm/@nuxt+devtools@3.4.3_@nuxt+_c2e4448711e401111a9cb4df9c9491f6/node_modules/@nuxt/devtools"
       ],
       "@vue/runtime-core": [
-        "../node_modules/@vue/runtime-core"
+        "../node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core"
       ],
       "@vue/compiler-sfc": [
-        "../node_modules/@vue/compiler-sfc"
-      ],
-      "@vue/runtime-dom": [
-        "../node_modules/@vue/runtime-dom"
+        "../node_modules/.pnpm/@vue+compiler-sfc@3.5.44/node_modules/@vue/compiler-sfc"
       ],
       "@nuxt/schema": [
-        "../node_modules/@nuxt/schema"
+        "../node_modules/.pnpm/@nuxt+schema@3.21.11/node_modules/@nuxt/schema"
       ],
-      "nuxt": [
-        "../node_modules/nuxt"
+      "defu": [
+        "../node_modules/.pnpm/defu@6.1.7/node_modules/defu"
       ],
-      "#internal/nuxt/paths": [
-        "../node_modules/nuxt/dist/core/runtime/nitro/paths"
+      "h3": [
+        "../node_modules/.pnpm/h3@1.15.11/node_modules/h3"
       ],
-      "~": [
-        "./.."
+      "consola": [
+        "../node_modules/.pnpm/consola@3.4.2/node_modules/consola"
       ],
-      "@": [
-        "./.."
+      "ofetch": [
+        "../node_modules/.pnpm/ofetch@1.5.1/node_modules/ofetch"
       ],
-      "~~": [
-        "./.."
+      "crossws": [
+        "../node_modules/.pnpm/crossws@0.3.5/node_modules/crossws"
       ],
-      "@@": [
-        "./.."
+      "unplugin-vue-router/client": [
+        "../node_modules/.pnpm/unplugin-vue-router@0.19.2__61c19aab47917d83e6ffa4aff42d8b3a/node_modules/unplugin-vue-router/client"
+      ],
+      "nitropack": [
+        "../node_modules/.pnpm/nitropack@2.13.4_@parcel+wa_64a570e3583b3dd5dbb91a416dcb9159/node_modules/nitropack"
+      ],
+      "vite/client": [
+        "../node_modules/.pnpm/vite@7.3.7_jiti@2.7.0_sass@1.105.2_terser@5.51.2_yaml@2.9.1/node_modules/vite/client"
+      ],
+      "nitropack/types": [
+        "../node_modules/.pnpm/nitropack@2.13.4_@parcel+wa_64a570e3583b3dd5dbb91a416dcb9159/node_modules/nitropack/types"
+      ],
+      "nitropack/runtime": [
+        "../node_modules/.pnpm/nitropack@2.13.4_@parcel+wa_64a570e3583b3dd5dbb91a416dcb9159/node_modules/nitropack/runtime"
+      ],
+      "#shared": [
+        "../shared"
+      ],
+      "#shared/*": [
+        "../shared/*"
       ],
       "assets": [
         "../assets"
@@ -94,20 +94,50 @@
       ],
       "public/*": [
         "../public/*"
+      ],
+      "#server": [
+        "../server"
+      ],
+      "#server/*": [
+        "../server/*"
+      ],
+      "#build": [
+        "./"
+      ],
+      "#build/*": [
+        "./*"
+      ],
+      "#internal/nuxt/paths": [
+        "../node_modules/.pnpm/@nuxt+nitro-server@3.21.11__a6dc5fdbdff5269d98af0387df23f4a6/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths"
+      ],
+      "#unhead/composables": [
+        "../node_modules/.pnpm/nuxt@3.21.11_@oxc-project+t_999915fe6e4176ef2f775bbb2a141a56/node_modules/nuxt/dist/head/runtime/composables/v3"
       ]
-    }
+    },
+    "lib": [
+      "esnext",
+      "webworker",
+      "dom.iterable"
+    ],
+    "noUncheckedIndexedAccess": true,
+    "allowArbitraryExtensions": true
   },
   "include": [
     "./types/nitro-nuxt.d.ts",
-    "../node_modules/@nuxt/devtools/runtime/server",
-    "../node_modules/@nuxt/telemetry/runtime/server",
+    "../node_modules/.pnpm/@nuxt+devtools@3.4.3_@nuxt+_c2e4448711e401111a9cb4df9c9491f6/node_modules/runtime/server",
+    "../node_modules/.pnpm/@nuxt+devtools@3.4.3_@nuxt+_c2e4448711e401111a9cb4df9c9491f6/node_modules/dist/runtime/server",
+    "../node_modules/.pnpm/@nuxt+telemetry@2.9.1_@nuxt+kit@3.21.11_magicast@0.5.5_/node_modules/runtime/server",
+    "../node_modules/.pnpm/@nuxt+telemetry@2.9.1_@nuxt+kit@3.21.11_magicast@0.5.5_/node_modules/dist/runtime/server",
+    "../server/**/*",
+    "../shared/**/*.d.ts",
     "./types/nitro.d.ts",
-    "../**/*",
-    "../server/**/*"
+    "../**/*"
   ],
   "exclude": [
     "../node_modules",
-    "../node_modules/nuxt/node_modules",
+    "../node_modules/.pnpm/nuxt@3.21.11_@oxc-project+t_999915fe6e4176ef2f775bbb2a141a56/node_modules/nuxt/node_modules",
+    "../node_modules/.pnpm/@nuxt+devtools@3.4.3_@nuxt+_c2e4448711e401111a9cb4df9c9491f6/node_modules/@nuxt/devtools/node_modules",
+    "../node_modules/.pnpm/@nuxt+telemetry@2.9.1_@nuxt+kit@3.21.11_magicast@0.5.5_/node_modules/@nuxt/telemetry/node_modules",
     "../dist"
   ]
 }
